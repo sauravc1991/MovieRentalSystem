@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MRSDataAccess.Entity.Language>
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+
+<h2>viewAllMovie</h2>
+
+    <div>
+    <table border="1" cellpadding="5" align="center" >
+        <tr>
+            <th>LanguageID</th>
+            <th>LanguageName</th>
+            
+        </tr>
+        @foreach (MRSDataAccess.Entity.Language item in Model)
+        {
+            <tr>
+                <td>@item.LanguageID</td>
+                <td>@item.LanguageName</td>
+                <td>
+                <span>
+                @Html.ActionLink("Delete", "Delete", "ManageLanguage", new { mid = item.LanguageID }, null)
+                </span>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@if (int.Parse(Session["RoleID"].ToString())==2)
+{
+    <div align="center"> 
+    @Html.ActionLink("Add Movies", "Index", "ManageMovies")
+    </div>
+}
+        
+@{
+       string rs = ViewBag.status;
+            
+	}
+   @if(! string.IsNullOrEmpty(rs))
+    {
+        <h3 style="color:Red"  align="center">@rs</h3>
+    }
+

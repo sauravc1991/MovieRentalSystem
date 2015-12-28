@@ -1,0 +1,71 @@
+﻿@model MRSDataAccess.Entity.MovieInformation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2  align="center">Details</h2>
+
+<fieldset>
+    <legend>MovieInformation</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Language.LanguageName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Language.LanguageName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Genre.GenreName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Genre.GenreName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MovieName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MovieName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Rating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Rating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Stock)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Stock)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.MovieID }) |
+   
+</p>

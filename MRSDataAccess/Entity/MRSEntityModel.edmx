@@ -1,0 +1,653 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MovieRentalSystemModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MovieRentalSystemModelStoreContainer">
+          <EntitySet Name="Genre" EntityType="MovieRentalSystemModel.Store.Genre" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Language" EntityType="MovieRentalSystemModel.Store.Language" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MovieInformation" EntityType="MovieRentalSystemModel.Store.MovieInformation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MovieTransact" EntityType="MovieRentalSystemModel.Store.MovieTransact" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="MovieRentalSystemModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="MovieRentalSystemModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="MovieRentalSystemModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_MovieInformation1" Association="MovieRentalSystemModel.Store.FK_MovieInformation1">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="MovieInformation" EntitySet="MovieInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieInformation2" Association="MovieRentalSystemModel.Store.FK_MovieInformation2">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="MovieInformation" EntitySet="MovieInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieTransact1" Association="MovieRentalSystemModel.Store.FK_MovieTransact1">
+            <End Role="User" EntitySet="User" />
+            <End Role="MovieTransact" EntitySet="MovieTransact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieTransact2" Association="MovieRentalSystemModel.Store.FK_MovieTransact2">
+            <End Role="MovieInformation" EntitySet="MovieInformation" />
+            <End Role="MovieTransact" EntitySet="MovieTransact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User1" Association="MovieRentalSystemModel.Store.FK_User1">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GenreName" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageName" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="MovieInformation">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageID" Type="int" Nullable="false" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+          <Property Name="MovieName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Stock" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Status" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="MovieTransact">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="int" Nullable="false" />
+          <Property Name="MovieID" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="date" Nullable="false" />
+          <Property Name="IssueDate" Type="date" />
+          <Property Name="ReturnDate" Type="date" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_MovieInformation1">
+          <End Role="Language" Type="MovieRentalSystemModel.Store.Language" Multiplicity="1" />
+          <End Role="MovieInformation" Type="MovieRentalSystemModel.Store.MovieInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="MovieInformation">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieInformation2">
+          <End Role="Genre" Type="MovieRentalSystemModel.Store.Genre" Multiplicity="1" />
+          <End Role="MovieInformation" Type="MovieRentalSystemModel.Store.MovieInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="MovieInformation">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieTransact1">
+          <End Role="User" Type="MovieRentalSystemModel.Store.User" Multiplicity="1" />
+          <End Role="MovieTransact" Type="MovieRentalSystemModel.Store.MovieTransact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="MovieTransact">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieTransact2">
+          <End Role="MovieInformation" Type="MovieRentalSystemModel.Store.MovieInformation" Multiplicity="1" />
+          <End Role="MovieTransact" Type="MovieRentalSystemModel.Store.MovieTransact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieInformation">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="MovieTransact">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User1">
+          <End Role="Role" Type="MovieRentalSystemModel.Store.Role" Multiplicity="1" />
+          <End Role="User" Type="MovieRentalSystemModel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spAuthenticateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="UPassword" Type="varchar" Mode="In" />
+          <Parameter Name="OutRoleId" Type="int" Mode="InOut" />
+          <Parameter Name="OutUName" Type="varchar" Mode="InOut" />
+          <Parameter Name="OutUserID" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="spChangePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UID" Type="int" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spCheckIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spCheckMovieStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mid" Type="int" Mode="In" />
+          <Parameter Name="stock" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="spCheckOut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="rid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spCountMoviePerUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="count" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="spDeleteGenreByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="gid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeleteLanguageByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="lid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spDeleteMovieByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertGenre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="genreId" Type="int" Mode="In" />
+          <Parameter Name="genreName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertLanguage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="languageName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="movieid" Type="int" Mode="In" />
+          <Parameter Name="languageid" Type="int" Mode="In" />
+          <Parameter Name="genreid" Type="int" Mode="In" />
+          <Parameter Name="moviename" Type="varchar" Mode="In" />
+          <Parameter Name="rating" Type="int" Mode="In" />
+          <Parameter Name="price" Type="float" Mode="In" />
+          <Parameter Name="stock" Type="int" Mode="In" />
+          <Parameter Name="description" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spInsertUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spReserveMovie" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="uid" Type="int" Mode="In" />
+          <Parameter Name="movieid" Type="int" Mode="In" />
+          <Parameter Name="status" Type="varchar" Mode="In" />
+          <Parameter Name="requestID" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="spTopTen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spUserViewProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UID" Type="int" Mode="In" />
+          <Parameter Name="outUsername" Type="varchar" Mode="InOut" />
+          <Parameter Name="outName" Type="varchar" Mode="InOut" />
+          <Parameter Name="outPhone" Type="varchar" Mode="InOut" />
+          <Parameter Name="outEmail" Type="varchar" Mode="InOut" />
+          <Parameter Name="outAddress" Type="varchar" Mode="InOut" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieRentalSystemModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MovieRentalSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Genres" EntityType="MovieRentalSystemModel.Genre" />
+          <EntitySet Name="Languages" EntityType="MovieRentalSystemModel.Language" />
+          <EntitySet Name="MovieInformations" EntityType="MovieRentalSystemModel.MovieInformation" />
+          <EntitySet Name="MovieTransacts" EntityType="MovieRentalSystemModel.MovieTransact" />
+          <EntitySet Name="Roles" EntityType="MovieRentalSystemModel.Role" />
+          <EntitySet Name="sysdiagrams" EntityType="MovieRentalSystemModel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="MovieRentalSystemModel.User" />
+          <AssociationSet Name="FK_MovieInformation2" Association="MovieRentalSystemModel.FK_MovieInformation2">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="MovieInformation" EntitySet="MovieInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieInformation1" Association="MovieRentalSystemModel.FK_MovieInformation1">
+            <End Role="Language" EntitySet="Languages" />
+            <End Role="MovieInformation" EntitySet="MovieInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieTransact2" Association="MovieRentalSystemModel.FK_MovieTransact2">
+            <End Role="MovieInformation" EntitySet="MovieInformations" />
+            <End Role="MovieTransact" EntitySet="MovieTransacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MovieTransact1" Association="MovieRentalSystemModel.FK_MovieTransact1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="MovieTransact" EntitySet="MovieTransacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User1" Association="MovieRentalSystemModel.FK_User1">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="InsertUser">
+            <Parameter Name="RoleID" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spTopTen" ReturnType="Collection(MovieRentalSystemModel.spTopTen_Result)" />
+          <FunctionImport Name="AuthenticateUser">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="UPassword" Mode="In" Type="String" />
+            <Parameter Name="OutRoleId" Mode="InOut" Type="Int32" />
+            <Parameter Name="OutUName" Mode="InOut" Type="String" />
+            <Parameter Name="OutUserID" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UserViewProfile">
+            <Parameter Name="UID" Mode="In" Type="Int32" />
+            <Parameter Name="outUsername" Mode="InOut" Type="String" />
+            <Parameter Name="outName" Mode="InOut" Type="String" />
+            <Parameter Name="outPhone" Mode="InOut" Type="String" />
+            <Parameter Name="outEmail" Mode="InOut" Type="String" />
+            <Parameter Name="outAddress" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ChangePassword">
+            <Parameter Name="UID" Mode="In" Type="Int32" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertMovie">
+            <Parameter Name="movieid" Mode="In" Type="Int32" />
+            <Parameter Name="languageid" Mode="In" Type="Int32" />
+            <Parameter Name="genreid" Mode="In" Type="Int32" />
+            <Parameter Name="moviename" Mode="In" Type="String" />
+            <Parameter Name="rating" Mode="In" Type="Int32" />
+            <Parameter Name="price" Mode="In" Type="Double" />
+            <Parameter Name="stock" Mode="In" Type="Int32" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteMovieByID">
+          <Parameter Name="mid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteGenreByID">
+          <Parameter Name="gid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteLanguageByID">
+          <Parameter Name="lid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertLanguage">
+          <Parameter Name="languageName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertGenre">
+            <Parameter Name="genreId" Mode="In" Type="Int32" />
+            <Parameter Name="genreName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CountMoviePerUser">
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="count" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CheckMovieStock">
+            <Parameter Name="mid" Mode="In" Type="Int32" />
+            <Parameter Name="stock" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReserveMovie">
+            <Parameter Name="uid" Mode="In" Type="Int32" />
+            <Parameter Name="movieid" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="String" />
+            <Parameter Name="requestID" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CheckIn">
+            <Parameter Name="rid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CheckOut">
+            <Parameter Name="rid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenreName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="MovieInformations" Relationship="MovieRentalSystemModel.FK_MovieInformation2" FromRole="Genre" ToRole="MovieInformation" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageName" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="MovieInformations" Relationship="MovieRentalSystemModel.FK_MovieInformation1" FromRole="Language" ToRole="MovieInformation" />
+        </EntityType>
+        <EntityType Name="MovieInformation">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageID" Type="Int32" Nullable="false" />
+          <Property Name="GenreID" Type="Int32" Nullable="false" />
+          <Property Name="MovieName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Status" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Genre" Relationship="MovieRentalSystemModel.FK_MovieInformation2" FromRole="MovieInformation" ToRole="Genre" />
+          <NavigationProperty Name="Language" Relationship="MovieRentalSystemModel.FK_MovieInformation1" FromRole="MovieInformation" ToRole="Language" />
+          <NavigationProperty Name="MovieTransacts" Relationship="MovieRentalSystemModel.FK_MovieTransact2" FromRole="MovieInformation" ToRole="MovieTransact" />
+        </EntityType>
+        <EntityType Name="MovieTransact">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID" Type="Int32" Nullable="false" />
+          <Property Name="MovieID" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" />
+          <Property Name="IssueDate" Type="DateTime" Nullable="true" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="true" />
+          <Property Name="Status" Type="String" MaxLength="10" Unicode="false" FixedLength="false" Nullable="true" />
+          <NavigationProperty Name="MovieInformation" Relationship="MovieRentalSystemModel.FK_MovieTransact2" FromRole="MovieTransact" ToRole="MovieInformation" />
+          <NavigationProperty Name="User" Relationship="MovieRentalSystemModel.FK_MovieTransact1" FromRole="MovieTransact" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="MovieRentalSystemModel.FK_User1" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="MovieTransacts" Relationship="MovieRentalSystemModel.FK_MovieTransact1" FromRole="User" ToRole="MovieTransact" />
+          <NavigationProperty Name="Role" Relationship="MovieRentalSystemModel.FK_User1" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK_MovieInformation2">
+          <End Role="Genre" Type="MovieRentalSystemModel.Genre" Multiplicity="1" />
+          <End Role="MovieInformation" Type="MovieRentalSystemModel.MovieInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="MovieInformation">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieInformation1">
+          <End Role="Language" Type="MovieRentalSystemModel.Language" Multiplicity="1" />
+          <End Role="MovieInformation" Type="MovieRentalSystemModel.MovieInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="MovieInformation">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieTransact2">
+          <End Role="MovieInformation" Type="MovieRentalSystemModel.MovieInformation" Multiplicity="1" />
+          <End Role="MovieTransact" Type="MovieRentalSystemModel.MovieTransact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieInformation">
+              <PropertyRef Name="MovieID" />
+            </Principal>
+            <Dependent Role="MovieTransact">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MovieTransact1">
+          <End Role="User" Type="MovieRentalSystemModel.User" Multiplicity="1" />
+          <End Role="MovieTransact" Type="MovieRentalSystemModel.MovieTransact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="MovieTransact">
+              <PropertyRef Name="UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User1">
+          <End Role="Role" Type="MovieRentalSystemModel.Role" Multiplicity="1" />
+          <End Role="User" Type="MovieRentalSystemModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spTopTen_Result">
+          <Property Type="String" Name="MovieName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Rating" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieRentalSystemModelStoreContainer" CdmEntityContainer="MovieRentalSystemEntities">
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="MovieRentalSystemModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="GenreName" ColumnName="GenreName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="MovieRentalSystemModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieInformations">
+            <EntityTypeMapping TypeName="MovieRentalSystemModel.MovieInformation">
+              <MappingFragment StoreEntitySet="MovieInformation">
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieTransacts">
+            <EntityTypeMapping TypeName="MovieRentalSystemModel.MovieTransact">
+              <MappingFragment StoreEntitySet="MovieTransact">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MovieRentalSystemModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MovieRentalSystemModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MovieRentalSystemModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertUser" FunctionName="MovieRentalSystemModel.Store.spInsertUser" />
+          <FunctionImportMapping FunctionImportName="spTopTen" FunctionName="MovieRentalSystemModel.Store.spTopTen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MovieRentalSystemModel.spTopTen_Result">
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AuthenticateUser" FunctionName="MovieRentalSystemModel.Store.spAuthenticateUser" />
+          <FunctionImportMapping FunctionImportName="UserViewProfile" FunctionName="MovieRentalSystemModel.Store.spUserViewProfile" />
+          <FunctionImportMapping FunctionImportName="ChangePassword" FunctionName="MovieRentalSystemModel.Store.spChangePassword" />
+          <FunctionImportMapping FunctionImportName="InsertMovie" FunctionName="MovieRentalSystemModel.Store.spInsertMovie" />
+          <FunctionImportMapping FunctionImportName="DeleteMovieByID" FunctionName="MovieRentalSystemModel.Store.spDeleteMovieByID" />
+          <FunctionImportMapping FunctionImportName="DeleteGenreByID" FunctionName="MovieRentalSystemModel.Store.spDeleteGenreByID" />
+          <FunctionImportMapping FunctionImportName="DeleteLanguageByID" FunctionName="MovieRentalSystemModel.Store.spDeleteLanguageByID" />
+          <FunctionImportMapping FunctionImportName="InsertLanguage" FunctionName="MovieRentalSystemModel.Store.spInsertLanguage" />
+          <FunctionImportMapping FunctionImportName="InsertGenre" FunctionName="MovieRentalSystemModel.Store.spInsertGenre" />
+          <FunctionImportMapping FunctionImportName="CountMoviePerUser" FunctionName="MovieRentalSystemModel.Store.spCountMoviePerUser" />
+          <FunctionImportMapping FunctionImportName="CheckMovieStock" FunctionName="MovieRentalSystemModel.Store.spCheckMovieStock" />
+          <FunctionImportMapping FunctionImportName="ReserveMovie" FunctionName="MovieRentalSystemModel.Store.spReserveMovie" />
+          <FunctionImportMapping FunctionImportName="CheckIn" FunctionName="MovieRentalSystemModel.Store.spCheckIn" />
+          <FunctionImportMapping FunctionImportName="CheckOut" FunctionName="MovieRentalSystemModel.Store.spCheckOut" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MRSEntityModel">
+        <EntityTypeShape EntityType="MovieRentalSystemModel.Genre" Width="1.5" PointX="1" PointY="0.625" Height="1.4279589843749998" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieRentalSystemModel.Language" Width="1.5" PointX="1" PointY="2.5" Height="1.4279589843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieRentalSystemModel.MovieInformation" Width="1.5" PointX="3.75" PointY="0.5" Height="2.9070849609374996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieRentalSystemModel.MovieTransact" Width="1.5" PointX="6.25" PointY="0.5" Height="2.4140429687499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieRentalSystemModel.Role" Width="1.5" PointX="3.75" PointY="4.75" Height="1.4279589843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieRentalSystemModel.sysdiagram" Width="1.5" PointX="9.5" PointY="1.125" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="MovieRentalSystemModel.User" Width="1.5" PointX="6.25" PointY="3.625" Height="2.5783902994791674" IsExpanded="true" />
+        <AssociationConnector Association="MovieRentalSystemModel.FK_MovieInformation2" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.5" PointY="1.3389794921874998" />
+          <ConnectorPoint PointX="3.75" PointY="1.3389794921874998" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieRentalSystemModel.FK_MovieInformation1" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.5" PointY="2.95354248046875" />
+          <ConnectorPoint PointX="3.75" PointY="2.95354248046875" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieRentalSystemModel.FK_MovieTransact2" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="1.7070214843749998" />
+          <ConnectorPoint PointX="6.25" PointY="1.7070214843749998" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieRentalSystemModel.FK_MovieTransact1" ManuallyRouted="false">
+          <ConnectorPoint PointX="7" PointY="3.625" />
+          <ConnectorPoint PointX="7" PointY="2.9140429687499996" />
+        </AssociationConnector>
+        <AssociationConnector Association="MovieRentalSystemModel.FK_User1" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="5.4639794921875" />
+          <ConnectorPoint PointX="6.25" PointY="5.4639794921875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

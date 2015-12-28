@@ -1,0 +1,47 @@
+﻿@model MRSApp.Models.LoginData
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "frmLogin", name = "frmLogin" }))
+{
+     @Html.ValidationSummary(true) 
+		<fieldset> <legend border="2px">Login</legend> <table  cellpadding="2" cellspacing="18" align="center" width="50%">
+    <tr>
+    <th>Enter UserId</th>
+        <td>
+           @Html.TextBoxFor((x) => x.UserID, new { id = "txtNum1", name = "txtnum1", maxlength = "10" })
+            @Html.ValidationMessageFor(model => model.UserID)
+        </td>
+    </tr>
+    <tr>
+    <th>Enter Password</th>
+        <td>
+           @Html.TextBoxFor((x) => x.Password, new { id = "txtNum1", name = "txtnum1", maxlength = "10" })
+        </td>
+    </tr>
+   <tr><th ></th>
+        <td>
+            <input type="submit"
+             name="btnLogin" value="Login " />
+        </td>
+    </tr>
+    </table>
+    </fieldset>
+}
+    @{
+        string ls = ViewBag.LoginStatus;
+            
+	}
+   @if (!string.IsNullOrEmpty(ls))
+   {
+        <h3 style="color:Red"  align="center">@ls</h3>
+    }
+
+    @section Scripts 
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

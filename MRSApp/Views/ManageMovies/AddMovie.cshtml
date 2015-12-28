@@ -1,0 +1,102 @@
+﻿@model MRSApp.Models.MovieData
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Add Movies</h2>
+
+@using (Html.BeginForm("AddMovie", "ManageMovies", FormMethod.Post, new { id = "frmLogin3", name = "frmLogin3" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>MovieData</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MovieID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MovieID)
+            @Html.ValidationMessageFor(model => model.MovieID)
+        </div>
+<div class="editor-field">
+            @Html.EditorFor(model => model.LanguageId)
+            @Html.ValidationMessageFor(model => model.LanguageId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GenreID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GenreID)
+            @Html.ValidationMessageFor(model => model.GenreID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MovieName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MovieName)
+            @Html.ValidationMessageFor(model => model.MovieName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Rating)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Rating)
+            @Html.ValidationMessageFor(model => model.Rating)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stock)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Stock)
+            @Html.ValidationMessageFor(model => model.Stock)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <p>
+            <input type="submit" value="Add Movie" />
+        </p>
+    </fieldset>
+}
+@{
+       string rs = ViewBag.status;
+            
+	}
+   @if(! string.IsNullOrEmpty(rs))
+    {
+        <h3 style="color:Red"  align="center">@rs</h3>
+    }
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

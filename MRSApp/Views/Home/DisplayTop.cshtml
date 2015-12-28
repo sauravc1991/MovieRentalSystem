@@ -1,0 +1,29 @@
+﻿@model List<MRSApp.ViewModels.TopTenMoviesViewModel>
+
+@{
+    ViewBag.Title = "DisplayTop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 align="center">Top Ten Movies</h2>
+
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+    <tr>
+        <th>Movie Name</th>
+        <th>Rating</th>
+    </tr>
+    </thead>
+    <tbody>    
+        @foreach (var item in Model)
+        {
+            <tr>
+            <td>@item.MovieName</td>
+            <td>@item.Rating</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>

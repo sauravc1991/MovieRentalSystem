@@ -1,0 +1,63 @@
+﻿@model MRSApp.Models.RegisterData
+
+@{
+    ViewBag.Title = "RegisterNewUser";
+}
+
+<h2>New User Registration</h2>
+ @{
+     string rs = ViewBag.RegisterStatus;
+            
+	}
+   @if (!string.IsNullOrEmpty(rs))
+   {
+        <h3 style="color:Red"  align="center">@rs</h3>
+   }
+
+@using (Html.BeginForm("CreateUser", "Home", FormMethod.Post, new { id = "frmLogin", name = "frmLogin" }))
+{
+    @Html.ValidationSummary(true)
+		  <div class="form-group">   
+        <label>Name</label>
+        @Html.TextBoxFor((x) => x.Name, new { id = "txtName", name = "txtName", maxlength = "50", @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Name)
+        </div>
+   <div class="form-group">   
+    <label>UserName</label>
+        @Html.TextBoxFor((x) => x.UserName, new { id = "txtUName", name = "txtUName", maxlength = "50", @class = "form-control" })
+         @Html.ValidationMessageFor(x => x.UserName)
+       </div>
+    <div class="form-group">   
+    <label>Password</label>
+        @Html.PasswordFor((x) => x.Password, new { id = "txtPass", name = "txtPass", maxlength = "50", @class = "form-control"  })
+         @Html.ValidationMessageFor(x => x.Password)
+        </div>
+    <div class="form-group">   
+        <label>Phone</label>
+         @Html.TextBoxFor((x) => x.Phone, new { id = "txtPhone", name = "txtPhone", maxlength = "10", @class = "form-control" })
+         @Html.ValidationMessageFor(x => x.Phone)
+       </div>
+    <div class="form-group">   
+    <label>Email</label>
+        @Html.TextBoxFor((x) => x.Email, new { id = "txtEmail", name = "txtEmail", maxlength = "50", @class = "form-control" })
+         @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    <div class="form-group">   
+        <label>Address</label>
+        @Html.TextBoxFor((x) => x.Address, new { id = "txtAddress", name = "txtAddress", maxlength = "100", @class = "form-control" })
+         @Html.ValidationMessageFor(x => x.Address)
+       </div>
+  <div class="form-group">     
+      <input type="submit"
+             name="btnSubmit" value="Register" , class = "btn btn-default" align="center"/>
+          
+       </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

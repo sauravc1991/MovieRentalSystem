@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>@ViewBag.Title</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		
+        @Styles.Render("~/Content/bootstrap.min.css")
+        @Styles.Render("~/Content/styles.css")
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		
+	</head>
+	<body>
+    @{
+    int RoleId = int.Parse(Session["RoleId"].ToString()); 
+        
+    }
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="navbar-brand">Movie Rental System</span>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+           <li>@Html.ActionLink("Home","HomeView","Home")</li>
+
+                 @if (int.Parse(Session["RoleId"].ToString()) != 1 && int.Parse(Session["RoleId"].ToString()) != 2)
+                 {
+                    <li>@Html.ActionLink("Login", "Index", "Home")</li> 
+                    <li>@Html.ActionLink("Sign Up", "NewUserReg", "Home")</li> 
+                     
+                 }
+                    <li>@Html.ActionLink("Contact Us","ContactUs","Home")</li> 
+                   
+                    @if (int.Parse(Session["RoleId"].ToString()) == 1 || int.Parse(Session["RoleId"].ToString()) == 2)
+                    {
+                    <li> @Html.ActionLink("Log Out", "LogOut", "Home")</li>
+                    }
+            </ul>
+        </div>
+      </div>
+</nav>
+
+<div class="container-fluid">
+      
+      <div class="row row-offcanvas row-offcanvas-left">
+        
+         <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+           
+            <ul class="nav nav-sidebar-fixed">
+               
+             @if (RoleId == 2)
+        {
+            @Html.Partial("_AdminOptions");
+        }
+        else if (RoleId == 1)
+        {
+             @Html.Partial("_CustomerOptions");
+        }
+            
+            </ul>
+                     
+        </div><!--/span-->
+        
+        <div class="col-sm-9 col-md-10 main">
+          
+          <!--toggle sidebar button-->
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+          </p>
+          
+		  <h1 class="page-header">
+            Welcome @Session["UserName"]
+           @* <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>*@
+          </h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder text-center">
+              <img src="~/Content/themes/base/images/IMG1.jpg" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+              <h4>Mission Impossible Ghost Protocol</h4>
+             </div>
+            <div class="col-xs-6 col-sm-3 placeholder text-center">
+              <img src="~/Content/themes/base/images/IMG2.jpg" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+              <h4>Spiderman 2</h4>
+             </div>
+            <div class="col-xs-6 col-sm-3 placeholder text-center">
+              <img src="~/Content/themes/base/images/IMG3.jpg" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+              <h4>Bodyguard</h4>
+             </div>
+            <div class="col-xs-6 col-sm-3 placeholder text-center">
+              <img src="~/Content/themes/base/images/IMG4.jpg" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">
+              <h4>Kick</h4>
+             </div>
+          </div>         
+          <hr />
+          <div>
+         @* <h2 class="sub-header">Section title</h2>
+          *@
+
+              @RenderBody()
+              </div>
+            
+                  
+      </div><!--/row-->
+	</div>
+</div><!--/.container-->
+
+<footer>
+  <p class="pull-right">©2015 Movie Rental System</p>
+</footer>
+        
+	<!-- script references -->
+		@Scripts.Render("~/Scripts/jquery.min.js")
+        @Scripts.Render("~/Scripts/bootstrap.min.js")
+        @Scripts.Render("~/Scripts/scripts.js")
+        @RenderSection("scripts", required: false)
+	</body>
+</html>

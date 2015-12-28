@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MRSDataAccess.Entity.MovieTransact>
+
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<h2 align="center">Issued Movies</h2>
+ 
+    <div class="table-responsive">
+<table class="table table-striped">
+<thead>
+        <tr>
+            <th>RequestID</th>
+            <th>User</th>
+            <th>MovieID</th>
+            <th>MovieName</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Manage</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+              @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RequestID</td>
+                <td>@item.User.Name</td>
+                <td>@item.MovieID</td>
+                <td>@item.MovieInformation.MovieName</td>
+                <td>@item.MovieInformation.Price</td>
+                <td>@item.Status</td>
+                <td>
+                <span>
+                @Html.ActionLink("Return", "CheckOutConfirm", "Check", new { rid = item.RequestID }, null)
+                </span></td>
+                      
+            </tr>
+        }
+        </tbody>
+  
+    </table>
+</div>

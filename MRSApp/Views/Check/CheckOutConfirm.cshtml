@@ -1,0 +1,14 @@
+﻿@model IEnumerable<MRSDataAccess.Entity.MovieTransact>
+
+@{
+    ViewBag.Title = "CheckOutConfirm";
+}
+
+@{
+       string rs = ViewBag.Status;
+            
+	}
+   @if(! string.IsNullOrEmpty(rs))
+    {
+        <h3 style="color:Red"  align="center">@rs</h3>
+    }

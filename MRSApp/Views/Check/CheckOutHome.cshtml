@@ -1,0 +1,15 @@
+﻿@model MRSApp.Models.Check
+
+@{
+    ViewBag.Title = "CheckOutHome";
+}
+
+@using (Html.BeginForm("CheckOut","Check",FormMethod.Post))
+{
+<fieldset>
+<legend>Show User Renting Details</legend>
+<h3>Please Enter the User ID</h3>
+@Html.TextBoxFor(x=>x.UID)
+<input type="submit" name="Search" value="Search" />
+</fieldset>
+}

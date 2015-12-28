@@ -1,0 +1,36 @@
+﻿@model MRSApp.Models.LoginData
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">Login Page</h2>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "frmLogin", name = "frmLogin" }))
+{
+<div class="row-sm-3">   
+    <label>Enter UserId</label>
+        
+           @Html.TextBoxFor((x) => x.UserID, new { id = "txtNum1", name = "txtnum1", maxlengh = "10" ,@class="form-control"})
+           @Html.ValidationMessageFor(x=>x.UserID)
+        </div><br />
+     <div class="row-sm-3">
+    <label>Enter Password</label>
+       
+        @Html.PasswordFor((x) => x.Password, new { id = "txtNum1", name = "txtnum1", maxlengh = "10", @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Password)
+   </div>
+    <div class="row-sm-3">
+            <input type="submit"
+             name="btnLogin" value="Login " class="btn btn-default"/>
+       </div> 
+    
+}
+@{
+    string ls = ViewBag.LoginStatus;
+            
+}
+@if (!string.IsNullOrEmpty(ls))
+{
+    <h3 style="color:Red"  align="center">@ls</h3>
+}

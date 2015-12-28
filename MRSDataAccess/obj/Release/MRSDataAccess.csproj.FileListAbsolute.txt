@@ -1,0 +1,5 @@
+E:\Experimentation\MRSApp\MRSDataAccess\bin\Release\MRSDataAccess.dll.config
+E:\Experimentation\MRSApp\MRSDataAccess\bin\Release\MRSDataAccess.dll
+E:\Experimentation\MRSApp\MRSDataAccess\bin\Release\MRSDataAccess.pdb
+E:\Experimentation\MRSApp\MRSDataAccess\obj\Release\MRSDataAccess.dll
+E:\Experimentation\MRSApp\MRSDataAccess\obj\Release\MRSDataAccess.pdb

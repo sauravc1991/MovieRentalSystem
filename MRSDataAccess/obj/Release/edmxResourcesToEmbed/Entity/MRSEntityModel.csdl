@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MovieRentalSystemModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="MovieRentalSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Genres" EntityType="MovieRentalSystemModel.Genre" />
+    <EntitySet Name="Languages" EntityType="MovieRentalSystemModel.Language" />
+    <EntitySet Name="MovieInformations" EntityType="MovieRentalSystemModel.MovieInformation" />
+    <EntitySet Name="MovieTransacts" EntityType="MovieRentalSystemModel.MovieTransact" />
+    <EntitySet Name="Roles" EntityType="MovieRentalSystemModel.Role" />
+    <EntitySet Name="sysdiagrams" EntityType="MovieRentalSystemModel.sysdiagram" />
+    <EntitySet Name="Users" EntityType="MovieRentalSystemModel.User" />
+    <AssociationSet Name="FK_MovieInformation2" Association="MovieRentalSystemModel.FK_MovieInformation2">
+      <End Role="Genre" EntitySet="Genres" />
+      <End Role="MovieInformation" EntitySet="MovieInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MovieInformation1" Association="MovieRentalSystemModel.FK_MovieInformation1">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="MovieInformation" EntitySet="MovieInformations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MovieTransact2" Association="MovieRentalSystemModel.FK_MovieTransact2">
+      <End Role="MovieInformation" EntitySet="MovieInformations" />
+      <End Role="MovieTransact" EntitySet="MovieTransacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MovieTransact1" Association="MovieRentalSystemModel.FK_MovieTransact1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="MovieTransact" EntitySet="MovieTransacts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User1" Association="MovieRentalSystemModel.FK_User1">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="GenreID" />
+    </Key>
+    <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenreName" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="MovieInformations" Relationship="MovieRentalSystemModel.FK_MovieInformation2" FromRole="Genre" ToRole="MovieInformation" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageID" />
+    </Key>
+    <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LanguageName" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="MovieInformations" Relationship="MovieRentalSystemModel.FK_MovieInformation1" FromRole="Language" ToRole="MovieInformation" />
+  </EntityType>
+  <EntityType Name="MovieInformation">
+    <Key>
+      <PropertyRef Name="MovieID" />
+    </Key>
+    <Property Name="MovieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LanguageID" Type="Int32" Nullable="false" />
+    <Property Name="GenreID" Type="Int32" Nullable="false" />
+    <Property Name="MovieName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Genre" Relationship="MovieRentalSystemModel.FK_MovieInformation2" FromRole="MovieInformation" ToRole="Genre" />
+    <NavigationProperty Name="Language" Relationship="MovieRentalSystemModel.FK_MovieInformation1" FromRole="MovieInformation" ToRole="Language" />
+    <NavigationProperty Name="MovieTransacts" Relationship="MovieRentalSystemModel.FK_MovieTransact2" FromRole="MovieInformation" ToRole="MovieTransact" />
+  </EntityType>
+  <EntityType Name="MovieTransact">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UID" Type="Int32" Nullable="false" />
+    <Property Name="MovieID" Type="Int32" Nullable="false" />
+    <Property Name="RequestDate" Type="DateTime" Nullable="false" />
+    <Property Name="IssueDate" Type="DateTime" Nullable="false" />
+    <Property Name="ReturnDate" Type="DateTime" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="MovieInformation" Relationship="MovieRentalSystemModel.FK_MovieTransact2" FromRole="MovieTransact" ToRole="MovieInformation" />
+    <NavigationProperty Name="User" Relationship="MovieRentalSystemModel.FK_MovieTransact1" FromRole="MovieTransact" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Users" Relationship="MovieRentalSystemModel.FK_User1" FromRole="Role" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UID" />
+    </Key>
+    <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="MovieTransacts" Relationship="MovieRentalSystemModel.FK_MovieTransact1" FromRole="User" ToRole="MovieTransact" />
+    <NavigationProperty Name="Role" Relationship="MovieRentalSystemModel.FK_User1" FromRole="User" ToRole="Role" />
+  </EntityType>
+  <Association Name="FK_MovieInformation2">
+    <End Role="Genre" Type="MovieRentalSystemModel.Genre" Multiplicity="1" />
+    <End Role="MovieInformation" Type="MovieRentalSystemModel.MovieInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="GenreID" />
+      </Principal>
+      <Dependent Role="MovieInformation">
+        <PropertyRef Name="GenreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MovieInformation1">
+    <End Role="Language" Type="MovieRentalSystemModel.Language" Multiplicity="1" />
+    <End Role="MovieInformation" Type="MovieRentalSystemModel.MovieInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="LanguageID" />
+      </Principal>
+      <Dependent Role="MovieInformation">
+        <PropertyRef Name="LanguageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MovieTransact2">
+    <End Role="MovieInformation" Type="MovieRentalSystemModel.MovieInformation" Multiplicity="1" />
+    <End Role="MovieTransact" Type="MovieRentalSystemModel.MovieTransact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MovieInformation">
+        <PropertyRef Name="MovieID" />
+      </Principal>
+      <Dependent Role="MovieTransact">
+        <PropertyRef Name="MovieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MovieTransact1">
+    <End Role="User" Type="MovieRentalSystemModel.User" Multiplicity="1" />
+    <End Role="MovieTransact" Type="MovieRentalSystemModel.MovieTransact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UID" />
+      </Principal>
+      <Dependent Role="MovieTransact">
+        <PropertyRef Name="UID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User1">
+    <End Role="Role" Type="MovieRentalSystemModel.Role" Multiplicity="1" />
+    <End Role="User" Type="MovieRentalSystemModel.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

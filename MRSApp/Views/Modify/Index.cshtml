@@ -1,0 +1,29 @@
+﻿
+@model MRSApp.Models.PasswordData
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm("ChangeOfPassword", "Modify", FormMethod.Post, new { id = "frmLogin1", name = "frmLogin1" }))
+{
+    <fieldset>
+        <legend>Change Password</legend>
+        <br/>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NewPassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NewPassword)
+            @Html.ValidationMessageFor(model => model.NewPassword)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+
+

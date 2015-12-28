@@ -1,0 +1,35 @@
+﻿
+@model IEnumerable<MRSDataAccess.Entity.User>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 align="center">Available Users</h2>
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+        <tr>
+            <th>Name</th>
+            <th>UserName</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+         </tr>
+    </thead>
+    <tbody>
+        @foreach (MRSDataAccess.Entity.User item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.UserName</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+                <td>@item.Address</td>
+                            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+
+

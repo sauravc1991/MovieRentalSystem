@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MRSDataAccess.Entity.MovieInformation>
+
+@{
+    ViewBag.Title = "ReserveMovie";
+}
+@{
+    string rs = ViewBag.status+ViewBag.requestID;
+}
+@if(! string.IsNullOrEmpty(rs))
+{
+    <h3 style="color:Red"  align="center">@rs</h3>
+}
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+        <tr>
+            <th>MovieID</th>
+            <th>MovieName</th>
+            <th>Language</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th>Price</th>
+            <th>Manage</th>
+            
+        </tr>
+</thead>
+    <tbody>
+       @foreach (MRSDataAccess.Entity.MovieInformation item in Model)
+        {
+            <tr>
+                <td>@item.MovieID</td>
+                <td>@item.MovieName</td>
+                <td>@item.Language.LanguageName</td>
+                <td>@item.Genre.GenreName</td>
+                <td>@item.Rating</td>
+                <td>@item.Price</td>
+         
+                <td>
+                <span>
+                @Html.ActionLink("Reserve Movie", "ReserveMovie", "Reserve", new { mid = item.MovieID }, null)
+                </span>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@if (int.Parse(Session["RoleID"].ToString())==2)
+{
+    <div> 
+    @Html.ActionLink("Add Movies", "Index", "ManageMovies")
+    </div>
+}
+        

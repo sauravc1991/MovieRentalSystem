@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MRSDataAccess.Entity.User>
+@{
+    ViewBag.Title = "ViewUserByID";
+}
+
+<div class="table-responsive">
+<table class="table table-striped">
+<thead>
+       <tr>        
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th> Email </th>
+        <th> Address </th>           
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (MRSDataAccess.Entity.User item in Model)
+        {
+          <tr>
+             <td>
+            @item.UID
+            </td>
+            <td>
+            @item.Name
+            </td>
+              <td>
+            @item.Phone
+            </td>
+              <td>
+          @item.Email
+            </td>
+              <td>
+            @item.Address
+            </td>            
+           
+         </tr>
+        }
+        </tbody>
+    </table>
+    </div>

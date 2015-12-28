@@ -1,0 +1,48 @@
+﻿@model MRSDataAccess.Entity.Language
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Language</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset align="center">
+        <legend>MovieInformation</legend>
+
+      @*  @Html.HiddenFor(model => model.MovieID)*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LanguageID, "Language ID")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("LanguageID", String.Empty)
+            @Html.ValidationMessageFor(model => model.LanguageID)
+        </div>
+
+        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LanguageName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LanguageName)
+            @Html.ValidationMessageFor(model => model.LanguageName)
+        </div>
+
+      
+        
+
+        <p>
+            <input type="submit" value="Update" />
+        </p>
+    </fieldset>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

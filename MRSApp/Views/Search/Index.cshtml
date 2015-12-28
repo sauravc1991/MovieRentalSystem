@@ -1,0 +1,69 @@
+﻿@model MRSApp.ViewModels.Search
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+ <fieldset>
+        <legend>Search Movie</legend>
+        @using (Html.BeginForm("SearchMovieByName", "Search", FormMethod.Post))
+        {
+            <td>
+      @Html.TextBoxFor((x=>x.MSearch), new { id = "txtName", name = "txtName", maxlengh = "50" })
+        </td>
+        <input type="submit" id="btn1",name="btn1",value="Search" />
+        }
+ </fieldset>
+  @*  <div>
+    <table border="1" cellpadding="5" align="center" >
+        <tr>
+            <th>MovieID</th>
+            <th>MovieName</th>
+            <th>Language</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th>Price</th>
+            <th>Manage</th>
+            
+        </tr>
+        @foreach (MRSDataAccess.Entity.MovieInformation item in Model.movies)
+        {
+            <tr>
+                <td>@item.MovieID</td>
+                <td>@item.MovieName</td>
+                <td>@item.Language.LanguageName</td>
+                <td>@item.Genre.GenreName</td>
+                <td>@item.Rating</td>
+                <td>@item.Price</td>
+         
+                <td>
+                <span>
+                @Html.ActionLink("Edit", "Edit", "ManageMovies", new { mid = item.MovieID }, null) |
+                </span>
+                <span>
+                @Html.ActionLink("Delete", "Delete", "ManageMovies", new { mid = item.MovieID }, null)
+                </span>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@if (int.Parse(Session["RoleID"].ToString()) == 2)
+{
+    <div> 
+    @Html.ActionLink("Add Movies", "Index", "ManageMovies")
+    </div>
+}
+        
+@{
+    string rs = ViewBag.status;
+            
+	}
+   @if (!string.IsNullOrEmpty(rs))
+   {
+        <h3 style="color:Red"  align="center">@rs</h3>
+    }*@
+
+

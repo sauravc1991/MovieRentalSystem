@@ -1,0 +1,74 @@
+﻿@model MRSDataAccess.Entity.MovieInformation
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2  align="center">Delete Movies</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>MovieInformation</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Language.LanguageName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Language.LanguageName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Genre.GenreName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Genre.GenreName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MovieName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MovieName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Rating)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Rating)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Stock)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Stock)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+       
+    </p>
+}
